@@ -124,8 +124,9 @@ build_rNYCclean_data <- function(pad_version,dest_dir,num_cores,as_rdb=TRUE) {
 	#############################
 	###download version of PAD###
 	#############################
-	URL_path <- "https://www1.nyc.gov/assets/planning/download/zip/data-maps/open-data/"
-	
+	## MT: new path I got from bytes:
+	URL_path <- "https://s-media.nyc.gov/agencies/dcp/assets/files/zip/data-tools/bytes/"
+	## Original path coded with package:
 	URL_path1 <- 'https://www1.nyc.gov/assets/planning/download/zip/data-maps/open-data/'
 	
 	###if error when archive URL used, use current URL###
