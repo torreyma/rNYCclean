@@ -4,8 +4,15 @@
 \alias{parallel.seqsplt_addr}
 \title{Split address strings in a large data frame into sequential combinations of words.}
 \usage{
-parallel.seqsplt_addr(in_clus, in_df, new_addr_col_name, id_col_name,
-  addr_col_name, third_col_name, remove_orig = TRUE)
+parallel.seqsplt_addr(
+  in_clus,
+  in_df,
+  new_addr_col_name,
+  id_col_name,
+  addr_col_name,
+  third_col_name,
+  remove_orig = TRUE
+)
 }
 \arguments{
 \item{in_clus}{the number of clusters available to the function as integer.  Required.}

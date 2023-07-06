@@ -124,13 +124,12 @@ build_rNYCclean_data <- function(pad_version,dest_dir,num_cores,as_rdb=TRUE) {
 	#############################
 	###download version of PAD###
 	#############################
-	## MT: new path I got from bytes:
-	URL_path <- "https://s-media.nyc.gov/agencies/dcp/assets/files/zip/data-tools/bytes/"
-	## Original path coded with package:
-	URL_path1 <- 'https://www1.nyc.gov/assets/planning/download/zip/data-maps/open-data/'
+
+	## set PAD URL path:
+	pad_URL_path <- "https://data.cityofnewyork.us/download/bc8t-ecyu/application%2Fx-zip-compressed"
 	
-	###if error when archive URL used, use current URL###
-	tryCatch(download.file(paste0(URL_path,"pad",pad_version,".zip"),temp), error = function(e) download.file(paste0(URL_path1,"pad",pad_version,".zip"),temp))
+	###try downloading from URL, but note that DCP has often changed the URL###
+	tryCatch(download.file(pad_URL_path,temp), error = function(e) print(paste("Could not download PAD file from this URL:",pad_URL_path,"Check URL is still correct, and if not update the rNYCclean package.")))
 	
 	df_bobaadr <- fread(unzip(temp, "bobaadr.txt"), colClasses = "character")
 	
@@ -138,10 +137,11 @@ build_rNYCclean_data <- function(pad_version,dest_dir,num_cores,as_rdb=TRUE) {
 	#############################
 	###download version of SND###
 	#############################
+
+	## set SND URL path:
+	snd_URL_path <- "https://data.cityofnewyork.us/download/w4v2-rv6b/application%2Fx-zip-compressed"
 	
-	#download.file(paste0(URL_path,"snd",tolower(snd_version),".zip"),temp)
-	
-	tryCatch(download.file(paste0(URL_path,"snd",tolower(snd_version),".zip"),temp), error = function(e) download.file(paste0(URL_path1,"snd",tolower(snd_version),".zip"),temp))
+	tryCatch(download.file(snd_URL_path,temp), error = function(e) print(paste("Could not download SND file from this URL:",snd_URL_path,"Check URL is still correct, and if not update the rNYCclean package.")))
 	
 	df_snd <- as.data.table(read.delim(unz(temp, paste0("snd",toupper(snd_version),"cow.txt")),header=FALSE))
 	

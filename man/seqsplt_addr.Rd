@@ -4,8 +4,14 @@
 \alias{seqsplt_addr}
 \title{Split address strings in a data frame into sequential combinations of words.}
 \usage{
-seqsplt_addr(in_df, new_addr_col_name, id_col_name, addr_col_name,
-  third_col_name, remove_orig = TRUE)
+seqsplt_addr(
+  in_df,
+  new_addr_col_name,
+  id_col_name,
+  addr_col_name,
+  third_col_name,
+  remove_orig = TRUE
+)
 }
 \arguments{
 \item{in_df}{a data frame containing addresses.  Required.}

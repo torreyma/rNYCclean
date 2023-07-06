@@ -4,8 +4,14 @@
 \alias{parallel.splchk_addr}
 \title{Spell check a large data frame of NYC addresses.}
 \usage{
-parallel.splchk_addr(in_clus, in_df, new_addr_col_name, addr_col_name,
-  third_col_name, third_col_type)
+parallel.splchk_addr(
+  in_clus,
+  in_df,
+  new_addr_col_name,
+  addr_col_name,
+  third_col_name,
+  third_col_type
+)
 }
 \arguments{
 \item{in_clus}{the number of clusters available to the function as integer.  Required.}
