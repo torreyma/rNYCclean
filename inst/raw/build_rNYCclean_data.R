@@ -114,19 +114,22 @@ build_rNYCclean_data <- function(pad_version,dest_dir,num_cores,as_rdb=TRUE) {
 	
 	###get corresponding SND version###
 	###this is necessary because some SND versions are absent###
-	pad2snd <- get_file_versions(pad_version)
-	snd_version <- pad2snd$snd.v
+	#pad2snd <- get_file_versions(pad_version) # MT: get_file_versions seems to no longer be functioning properly, commenting this and next line
+	#snd_version <- pad2snd$snd.v
+	# Hardcode the snd_version:
+	snd_version <- pad_version
 	
 	###get correct PAD version###
 	###this is necessary in case file naming convention is off (e.g., "16B" instead of "16b")###
-	pad_version <- pad2snd$pad.v
+	# MT: again, because get_file_versions doesn't seem to be working, commenting next line to leave pad_version as the value the user gave us initially
+	#pad_version <- pad2snd$pad.v
 	
 	#############################
 	###download version of PAD###
 	#############################
 
 	## set PAD URL path:
-	pad_URL_path <- "https://data.cityofnewyork.us/download/bc8t-ecyu/application%2Fx-zip-compressed"
+	pad_URL_path <- "https://data.cityofnewyork.us/download/bc8t-ecyu/application%2Fx-zip-compressed" # MT: this was the path as of 23B. DCP keeps messing with this, and it's not clear if this will work for future versions.
 	
 	###try downloading from URL, but note that DCP has often changed the URL###
 	tryCatch(download.file(pad_URL_path,temp), error = function(e) print(paste("Could not download PAD file from this URL:",pad_URL_path,"Check URL is still correct, and if not update the rNYCclean package.")))
@@ -139,7 +142,7 @@ build_rNYCclean_data <- function(pad_version,dest_dir,num_cores,as_rdb=TRUE) {
 	#############################
 
 	## set SND URL path:
-	snd_URL_path <- "https://data.cityofnewyork.us/download/w4v2-rv6b/application%2Fx-zip-compressed"
+	snd_URL_path <- "https://data.cityofnewyork.us/download/w4v2-rv6b/application%2Fx-zip-compressed" # MT: this was the path as of 23B. DCP keeps messing with this, and it's not clear if this will work for future versions.
 	
 	tryCatch(download.file(snd_URL_path,temp), error = function(e) print(paste("Could not download SND file from this URL:",snd_URL_path,"Check URL is still correct, and if not update the rNYCclean package.")))
 	
@@ -921,6 +924,7 @@ get_file_versions <- function(pad_version){
 	temp.dt <- rbindlist(lapply(full.urls,function(full.url){
 
 		temp1 <- httr::content(httr::GET(URLencode(full.url)), "text", encoding = "ISO-8859-1")
+		# temp1 <- httr::content(httr::GET(URLencode("https://www1.nyc.gov/site/planning/data-maps/open-data.page")), "text", encoding = "ISO-8859-1") ## MT: this line just for testing this function
 		temp2 <- unlist(strsplit(temp1, " "))
 
 		###PAD file release/version info###
