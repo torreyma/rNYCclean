@@ -1,5 +1,5 @@
 # disassembled-build_rNYCclean_data.R
-# Last modified: 2023-07-12 12:09
+# Last modified: 2023-07-12 13:00
 # This file is the build_rNYCclean_data.R file disassembled from function form for step-by-step testing
 
 ####################################################################
@@ -260,10 +260,12 @@ build_rNYCclean_data <- function(pad_version,dest_dir,num_cores,as_rdb=TRUE) {
 		pathz5 <- file.path(dest_dir, "zipcode_words_vector.rda")
 		save(zipcode_words_vector, file = pathz5)
 		
-		pathz6 <- file.path(dest_dir, "pad2snd.rda")
-		save(pad2snd, file = pathz6)
+		# hard coded version above, so pad2snd object doesn't exist
+		#pathz6 <- file.path(dest_dir, "pad2snd.rda")
+		#save(pad2snd, file = pathz6)
 		
-		filez <- c(pathz1,pathz2,pathz3,pathz4,pathz5,pathz6)
+		#filez <- c(pathz1,pathz2,pathz3,pathz4,pathz5,pathz6)
+		filez <- c(pathz1,pathz2,pathz3,pathz4,pathz5)
 	}	
 	
 	cat("The following files have been saved:\n")
